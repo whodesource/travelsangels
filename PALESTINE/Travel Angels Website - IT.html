@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Angels - Sacred Journey Experts</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    header {
+      background-color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo img {
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    nav button {
+      background-color: purple;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin-left: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .package-details img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto;
+      border-radius: 12px;
+      border-bottom: 3px solid purple;
+    }
+
+    nav button:hover {
+      background-color: #3a006a;
+      transform: translateY(-2px);
+    }
+
+    .section {
+      display: none;
+      min-height: calc(100vh - 80px);
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    #index {
+      background: lightblue;
+      padding: 80px 2rem 2rem;
+    }
+
+  footer {
+    background-color: #2d004d;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 4rem;
+    border-top: 4px solid purple;
+  }
+
+footer a {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+    .index-Brand {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      border-radius: 25px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      background: linear-gradient(rgba(45, 0, 77, 0.1), rgba(45, 0, 77, 0.1));
+      animation: fadeIn 1.5s ease-out;
+      min-height: 500px;
+    }
+
+    .hero-content {
+      flex: 1;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hero-image {
+      flex: 1;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0 25px 25px 0;
+    }
+
+    .hero-message {
+      max-width: 600px;
+      color: #2d004d;
+    }
+
+    .top-banner {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-bottom: 4px solid black;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid purple;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .review-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .review-card {
+      background-color: #f8f8ff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .review-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .review-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .review-content h3 {
+      color: #2d004d;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-content p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .package-details {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin: 2rem auto;
+      max-width: 800px;
+    }
+
+    .nav-btn {
+      margin-top: 1.5rem;
+      padding: 0.9rem 2rem;
+      background-color: purple;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: #3a006a;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #2d004d;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: purple;
+    }
+    
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      display: none;
+    }
+    
+    .submit-btn {
+      background-color: purple;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background-color: #3a006a;
+    }
+    
+    .success-message {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .index-Brand {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .hero-image {
+        width: 100%;
+        height: 400px;
+        order: -1;
+      }
+      .hero-image img {
+        border-radius: 25px 25px 0 0;
+      }
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Angels.logo.png" alt="Travel Angels Logo">
+    </div>
+    <nav>
+      <button onclick="showSection('index')">Home</button>
+      <button onclick="showSection('home')">Destinations</button>
+      <button onclick="showSection('services')">Service</button>
+      <button onclick="showSection('about')">About</button>
+      <button onclick="showSection('contact')">Contact Us</button>
+    </nav>
+  </header>
+
+ <div id="index" class="section active">
+    <div class="index-Brand">
+      <div class="hero-content">
+        <div class="hero-message">
+          <h1 class="hero-title">Welcome to Travel Angels,<br>Where your choice matters</h1><br><br>
+          <p class="hero-subtitle">Our Objective ?</p><br>
+          <p class="hero-desc">
+            We aim to give you an unforgetable experience in this 
+            beautiful country ; a once in a lifetime opportunity
+            to enjoy the beauty of Palestine !
+          </p>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="Brandon-index.avif" alt="People having fun">
+      </div>
+    </div>
+
+    <div class="review-section">
+      <h2 class="article-title">Traveler Reviews</h2><br>
+
+      <div class="review-grid">
+        <div class="review-card">
+          <img src="tony.png" alt="Picture of satisfied customer">
+          <div class="review-content">
+            <h3>Anthony</h3>
+            <p>"My name is Anthony and I enjoyed my trip!
+              Travel Angels are amazing & they 
+              exceeded all expectations!"</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img src="Rave.jpg" alt="Satisfied Customer #2">
+          <div class="review-content">
+            <h3>Christiano Rave & Friends</h3>
+            <p>"A very cool trip I enjoyed with my friends.
+              Incredible tours & fascinating places ! would reccommend 100% !"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="home" class="section">
+    <div class="top-banner" style="background-image: url('home-top.jpg.jpg');"></div>
+    <div class="content">
+      <h2>Explore Holy Cities</h2>
+      <div class="card-container">
+        <div class="card" onclick="showSection('jerusalem')">
+          <img src="jer.jpg" alt="Jerusalem">
+          <div class="card-content">
+            <h3>Jerusalem</h3>
+            <p>Historical Capital</p>
+          </div>
+        </div>
+        
+        <div class="card" onclick="showSection('bethlehem')">
+          <img src="bet.jpeg" alt="Bethlehem">
+          <div class="card-content">
+            <h3>Bethlehem</h3>
+            <p>Birthplace of Jesus</p>
+          </div>
+        </div>
+        
+        <div class="card" onclick="showSection('gaza')">
+          <img src="gaza.jpeg" alt="Gaza">
+          <div class="card-content">
+            <h3>Gaza</h3>
+            <p>Coastal Heritage</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="services" class="section">
+    <div class="top-banner" style="background-image: url('service-top.jpg.jpg');"></div>
+    <div class="content">
+      <h2>Our Services</h2>
+      <div class="package-details">
+        <h3>Comprehensive Packages</h3><br>
+        <ul>
+          <li>Guided Pilgrimages - From $199/day</li>
+          <li>Cultural Lodging - From $299/night</li>
+          <li>Local Meal Plans - From $49/day</li>
+          <li>Custom Travel Itineraries - Bespoke Pricing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="jerusalem" class="section">
+    <div class="top-banner" style="background-image: url('jer.jpg');"></div>
+    <div class="package-details">
+      <h2>Jerusalem Experience</h2>
+      <div class="price-section">
+        <h3>7-Day Spiritual Journey Package</h3><br><br>
+        <p>Starting at $1499 per person ! <br>
+          includes : </p>
+        <ul>
+          <li>Guided tours of sacred sites</li>
+          <li>4-star accommodation</li>
+          <li>Daily traditional meals</li>
+          <li>Cultural immersion activities</li>
+        </ul>
+      </div>
+      <button class="nav-btn" onclick="showSection('home')">Back to Destinations</button>
+    </div>
+  </div>
+
+  <div id="bethlehem" class="section">
+    <div class="top-banner" style="background-image: url('bet.jpeg');"></div>
+    <div class="package-details">
+      <h2>Bethlehem Pilgrimage</h2>
+      <div class="price-section">
+        <h3>5-Day Cultural Experience</h3><br>
+        <p>Starting at $999 per person ! <br>
+          includes :
+        </p>
+        <ul>
+          <li>Nativity Church tours</li>
+          <li>Traditional guesthouse stay</li>
+          <li>Local artisan workshops</li>
+          <li>Community dining experiences</li>
+        </ul>
+      </div>
+      <button class="nav-btn" onclick="showSection('home')">Back to Destinations</button>
+    </div>
+  </div>
+
+  <div id="gaza" class="section">
+    <div class="top-banner" style="background-image: url('gaza.jpeg');"></div>
+    <div class="package-details">
+      <h2>Gaza Coastal Journey</h2>
+      <div class="price-section">
+        <h3>4-Day Historical Tour</h3><br>
+        <p>Starting at $799 per person !
+          includes : 
+        </p>
+        <ul>
+          <li>Seaside historical sites</li>
+          <li>Beachfront accommodation</li>
+          <li>Local seafood cuisine</li>
+          <li>Cultural storytelling sessions</li>
+        </ul>
+      </div>
+      <button class="nav-btn" onclick="showSection('home')">Back to Destinations</button>
+    </div>
+  </div>
+
+  <div id="about" class="section">
+    <div class="top-banner" style="background-image: url('about-top.jpg');"></div>
+    <div class="package-details">
+      <h2>About Travel Angels</h2><br>
+      <p>Founded in 2010, we specialize in creating meaningful 
+        travel experiences that connect people with sacred histories 
+        and living cultures. Our team of expert guides and cultural
+        consultants ensures every journey is both educational and 
+        transformative.</p>
+    <img src="Bran-Denn-pic.jpg" alt="Travel Angels Team" class="about-image">
+    <button class="nav-btn" onclick="showSection('index')">Return to Home</button>
+    </div>
+  </div>
+
+  <div id="contact" class="section">
+    <div class="top-banner" style="background-image: url('contact-top.png');"></div>
+    <div class="contact-form">
+      <h2>Contact Us</h2>
+      <br>
+      <p>Fill out the form below and we'll get back to you soon!</p>
+      <br>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="text" id="email" name="email" required>
+          <div class="error-message" id="email-error">Please enter a valid email address (must contain @)</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" name="phone" required>
+          <div class="error-message" id="phone-error">Please enter numbers only</div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+      
+      <div class="success-message" id="success-message">
+        Thank you! Your message has been submitted successfully.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Contact form validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Reset error messages
+      document.getElementById('email-error').style.display = 'none';
+      document.getElementById('phone-error').style.display = 'none';
+      
+      // Get values
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      
+      // Validate email
+      if (!email.includes('@')) {
+        document.getElementById('email-error').style.display = 'block';
+        return;
+      }
+      
+      // Validate phone (numbers only)
+      if (!/^\d+$/.test(phone)) {
+        document.getElementById('phone-error').style.display = 'block';
+        return;
+      }
+      
+      // If validation passes
+      document.getElementById('contactForm').reset();
+      document.getElementById('success-message').style.display = 'block';
+      
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        document.getElementById('success-message').style.display = 'none';
+      }, 3000);
+    });
+  </script>
+  
+  <footer>
+    <p>✨ Interested in a sacred journey? <strong>Email us at:</strong> <a href="mailto:travel-angels@gmail.com">travel-angels@gmail.com</a> ✨</p>
+  </footer>
+</body>
+</html>
